@@ -9,42 +9,25 @@ import org.openqa.selenium.support.PageFactory;
 import casestudy.utils.Driver;
 
 public class HomePage {
+    Helper helper = new Helper();
     public HomePage() {
         PageFactory.initElements(Driver.get(), this);
 
     }
 
-    @FindBy(css = "[alt='United States']")
-    public WebElement country;
-    @FindBy(css = ".c-close-icon.c-modal-close-icon")
-    public WebElement closeButton;
-    @FindBy(css ="#gh-search-input")
-    public WebElement searchInput;
-    @FindBy(css= ".header-search-button")
-    public WebElement searchButton;
+    @FindBy(css=".desktop-menu .js-navigation-item:nth-child(4)")
+    public WebElement categoryButton;
 
-    public void chooseUS() {
-        country.click();
+    @FindBy(css="button#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")
+    public WebElement closePopupButton;
+    public void goToCategoryPage() {
+        categoryButton.click();
+        helper.clickWithLinkText("Kadın İç Giyim");
+        helper.clickWithLinkText("Dizaltı Çorap");
+
     }
 
-    public void closePopup() {
-        closeButton.click();
+    public void closePopUp() {
+        closePopupButton.click();
     }
-
-    public void getPageTitle() {
-        String expectedTitle = "Best Buy | Official Online Store | Shop Now & Save";
-
-        Assert.assertEquals(expectedTitle, Driver.get().getTitle());
-        System.out.println(Driver.get().getTitle());
-    }
-
-    public void openDropdown(String dropdown) {
-        String locator = "//span[text()='" + dropdown + "']";
-        Driver.get().findElement(By.xpath(locator)).click();
-    }
-
-    public void openSubmenu(String submenu) {
-        Helper.clickWithLinkText(submenu);
-    }
-
 }

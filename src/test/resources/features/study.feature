@@ -2,27 +2,14 @@ Feature: Case Study Tests
 
   Background:
     Given homepage is open
-    And I close the pop up
+    And close pop-up
 
-  Scenario: Verify page title
-    When Page title verification
-    Then Maximize windows
-    And Search for Drone
-    And Verify search results are listed for Drone
+  Scenario: Verify payment page
+    Then Go to Dizaltı Çorap category page
+    And Filter product color with Siyah
+    And Go to any product detail page
+    And Add product to basket
+    And Go to basket page
+    When Go to payment page
+    Then Verfiy payment page
 
-
-  Scenario: Verify successful login
-
-    When I open "Account" dropdown menu
-    Then I Choose "Sign In" submenu
-    Then Sign in page should open
-    Then I filled account information
-    And I press Enter button
-    And Verify successful login
-
-
-   Scenario: Sign in with Google and open new tab
-     When I open "Account" dropdown menu
-     Then I Choose "Sign In" submenu
-     Then Sign in page should open
-     Then Sign in with Google

@@ -1,89 +1,63 @@
 package casestudy.step_def;
 
-import casestudy.pages.SearchResultPage;
-import casestudy.pages.SignInPage;
+import casestudy.pages.BasketPage;
+import casestudy.pages.CategoryPage;
+import casestudy.pages.ProductDetailPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.eo.Se;
-import org.apache.hc.core5.util.Asserts;
-import org.junit.Assert;
 import casestudy.pages.HomePage;
-import casestudy.utils.Driver;
 
 public class MyStepdefs {
     HomePage homepage = new HomePage();
-    SearchResultPage searchResultPage = new SearchResultPage();
-    SignInPage signInPage = new SignInPage();
-
+    CategoryPage categorypage = new CategoryPage();
+    ProductDetailPage productdetailpage = new ProductDetailPage();
+    BasketPage basketpage = new BasketPage();
     @Given("homepage is open")
     public void homepageIsOpen() {
-        homepage.chooseUS();
     }
 
-    @When("I close the pop up")
-    public void iCloseThePopUp() {
-
-        homepage.closePopup();
+    @And("close pop-up")
+    public void closePopUp() {
+        homepage.closePopUp();
     }
 
-
-    @When("Page title verification")
-    public void pageTitleVerification() {
-        homepage.getPageTitle();
+    @Then("Go to Dizaltı Çorap category page")
+    public void goToCategoryPage() {
+        homepage.goToCategoryPage();
     }
 
-    @Then("Maximize windows")
-    public void maximizeWindows() {
-        Driver.get().manage().window().maximize();
+    @And("Filter product color with Siyah")
+    public void filterProductColorWith() {
+        categorypage.filterCategory();
     }
 
-    @And("Search for Drone")
-    public void searchForDrone() {
-        homepage.searchInput.click();
-        homepage.searchInput.sendKeys("drone");
-        homepage.searchButton.click();
+    @And("Go to any product detail page")
+    public void goToAnyProductDetailPage() {
+        categorypage.goToProductDetailPage();
 
     }
 
-    @And("Verify search results are listed for Drone")
-    public void verifySearchResultsAreListedForDrone() {
-        searchResultPage.verifySearchResult();
+    @And("Add product to basket")
+    public void addProductToBasket() {
+        productdetailpage.addToBasket();
     }
 
-    @When("I open {string} dropdown menu")
-    public void iOpenDropdownMenu(String dropdown) {
-        homepage.openDropdown(dropdown);
+    @And("Go to basket page")
+    public void goToBasketPage() {
+        productdetailpage.goToBasket();
     }
 
-    @Then("I Choose {string} submenu")
-    public void IChooseSubmenu(String submenu) {
-        homepage.openSubmenu(submenu);
+    @When("Go to payment page")
+    public void goToPaymentPage() {
+        basketpage.goToPaymentPage();
+
     }
 
-    @Then("Sign in page should open")
-    public void signInPageShouldOpen() {
-        signInPage.verifyTitle();
-    }
-
-    @Then("I filled account information")
-    public void iFilledAccountInformation() {
-        signInPage.fillInformation();
-    }
-
-    @And("I press Enter button")
-    public void iPressEnterButton() {
-        signInPage.sendEnter();
-    }
-    @And("Verify successful login")
-    public void verifySuccessfulLogin() {
-        signInPage.verifySignIn();
+    @Then("Verfiy payment page")
+    public void verfiyPaymentPage() {
     }
 
 
-    @Then("Sign in with Google")
-    public void signInWithGoogle() {
-        signInPage.openGoogleLogin();
-    }
 }
